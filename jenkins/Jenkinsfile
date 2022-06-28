@@ -19,7 +19,7 @@ podTemplate(containers: [
   ) {
 node(POD_LABEL) {
     environment {
-            CI = 'true'
+            CI = 'false'
                 }
     stage ('get project'){
             git url: 'https://github.com/younes-bami/node.git', branch: 'master'

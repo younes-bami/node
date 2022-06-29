@@ -24,16 +24,19 @@ node(POD_LABEL) {
     environment {
             CI = 'true'
                 }
-    stage ('Git'){
+    stage ('Git Stage'){
             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
     }
-    stage ('build'){
+    stage ('build Stage'){
             container('node'){
                   stage('build'){
 			            sh '''
 			            npm install
 			            '''		             }
                              }
+
+    }
+    stage('Test Stage') {                        
            container('node'){
                   stage('Test'){
                         sh '''
@@ -41,8 +44,10 @@ node(POD_LABEL) {
                            '''
                                }
                              }
-           container('node'){
+    }
 
+    stage ('Deliver Stage'){
+           container('node'){
                   stage('deliver'){
                         sh '''
                          ./jenkins/scripts/deliver.sh

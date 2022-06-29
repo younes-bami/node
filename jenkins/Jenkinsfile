@@ -38,11 +38,11 @@ node(POD_LABEL) {
     }
     stage('Test Stage') {                        
            container('node'){
-                  stage('Test'){
+//                  stage('Test'){
                         sh '''
                          ./jenkins/scripts/test.sh
                            '''
-                               }
+ //                              }
                              }
     }
 

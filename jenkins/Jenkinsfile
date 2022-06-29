@@ -19,7 +19,7 @@ podTemplate(containers: [
   ) {
 node(POD_LABEL) {
     environment {
-            CI = 'true',
+            CI = 'true'
             NODE_OPTIONS = 'openssl-legacy-provider'
                 }
     stage ('get project'){

@@ -19,7 +19,8 @@ podTemplate(containers: [
   ) {
 node(POD_LABEL) {
     environment {
-            CI = 'false'
+            CI = 'true',
+            NODE_OPTIONS = 'openssl-legacy-provider'
                 }
     stage ('get project'){
             git url: 'https://github.com/younes-bami/node.git', branch: 'master'

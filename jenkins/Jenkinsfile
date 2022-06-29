@@ -26,6 +26,8 @@ node(POD_LABEL) {
                 }
     stage ('get project'){
             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
+    }
+    stage ('build')
             container('node'){
                   stage('build'){
 			            sh '''

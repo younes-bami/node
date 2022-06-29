@@ -24,10 +24,10 @@ node(POD_LABEL) {
     environment {
             CI = 'true'
                 }
-    stage ('get project'){
+    stage ('Git'){
             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
     }
-    stage ('build')
+    stage ('build'){
             container('node'){
                   stage('build'){
 			            sh '''

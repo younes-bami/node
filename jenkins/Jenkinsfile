@@ -16,7 +16,7 @@ podTemplate(containers: [
       claimName: 'maven-workspace'      ),
   persistentVolumeClaim(
       mountPath: '/home/jenkins/.npm', 
-      claimName: 'maven-workspace'      )
+      claimName: 'node-npm'      )
   ]
   
   ) {

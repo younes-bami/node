@@ -55,17 +55,17 @@ node(POD_LABEL) {
     }
 
     stage('Docker build ') {                        
-            stage ('Deliver '){
                 container('docker'){
                         
                          sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
                          sh "docker build -t web-app ."
                          sh "docker login -u younesic -p Dh123581321*"
-                         sh "docker push web-app"
+                         sh" docker tag web-app younesic/web-app
+                         sh "docker push younesic/web-app"
                              }
 
 
-} 
+
     }
 
 

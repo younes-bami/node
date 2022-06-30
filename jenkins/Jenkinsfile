@@ -3,7 +3,7 @@ podTemplate(containers: [
 
         containerTemplate(
         name: 'docker', 
-        image: 'docker:dind'
+        image: 'docker:18.05-dind'
         ),
         containerTemplate(
         name: 'jnlp', 

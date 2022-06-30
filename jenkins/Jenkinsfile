@@ -1,5 +1,10 @@
 podTemplate(containers: [
 
+
+        containerTemplate(
+        name: 'docker', 
+        image: 'docker:latest'
+        ),
         containerTemplate(
         name: 'jnlp', 
         image: 'jenkins/inbound-agent:latest'

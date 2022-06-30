@@ -3,7 +3,8 @@ podTemplate(containers: [
 
         containerTemplate(
         name: 'docker', 
-        image: 'docker:18.05-dind'
+        image: 'docker:latest'
+        privileged: true
         ),
         containerTemplate(
         name: 'jnlp', 

@@ -1,10 +1,5 @@
 podTemplate(containers: [
 
-
-        containerTemplate(
-        name: 'docker', 
-        image: 'docker:latest'
-        ),
         containerTemplate(
         name: 'jnlp', 
         image: 'jenkins/inbound-agent:latest'
@@ -48,20 +43,7 @@ node(POD_LABEL) {
                              }
     }
 
-
-
-      stage('Docker build'){
-        container('docker') {
-
-          sh '''
-          docker build -t web-app .
-          '''
-
-        }
-
-      }
-
-         stage ('Deliver '){
+    stage ('Deliver '){
            container('node'){
                         sh '''
                          ./jenkins/scripts/deliver.sh
@@ -73,6 +55,7 @@ node(POD_LABEL) {
                          ./jenkins/scripts/kill.sh
                            '''
                              }
+
 }
 
 }

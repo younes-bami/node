@@ -54,7 +54,12 @@ node(POD_LABEL) {
                              }
     }
 
-    stage('Docker build ') {                        
+   
+
+
+}
+node(POD_LABEL){
+ stage('Docker build ') {                        
                 container('docker'){
                         
                          sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
@@ -67,8 +72,6 @@ node(POD_LABEL) {
 
 
     }
-
-
 }
 
 }

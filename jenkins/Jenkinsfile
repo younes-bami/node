@@ -54,6 +54,7 @@ node(POD_LABEL) {
     stage('Docker build ') {                        
            container('docker'){
                         sh '''
+                         echo ${env.JOB_BASE_NAME}
                          cd /var/lib/jenkins/workspace/${env.JOB_BASE_NAME}/pipeline
                          '''
                          sh '''

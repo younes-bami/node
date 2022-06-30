@@ -56,25 +56,16 @@ node(POD_LABEL) {
 
     stage('Docker build ') {                        
             stage ('Deliver '){
-           container('node'){
-                        sh '''
-                         ./jenkins/scripts/deliver.sh
-                           '''
-                           
-                         input message: 'Finished using the web site? (Click "Proceed" to continue)'
-
-                         sh '''
-                         ./jenkins/scripts/kill.sh
-                           '''
-                             }
-
-}   container('docker'){
+                container('docker'){
                         
                          sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
                          sh "docker build -t web-app ."
                          sh "docker login -u younesic -p Dh123581321*"
                          sh "docker push web-app"
                              }
+
+
+} 
     }
 
 

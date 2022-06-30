@@ -1,13 +1,7 @@
 podTemplate(containers: [
 
 
-        containerTemplate(
-        name: 'docker', 
-        image: 'docker:18.05-dind',
-        privileged: true
 
-          
-        ),
         containerTemplate(
         name: 'jnlp', 
         image: 'jenkins/inbound-agent:latest'
@@ -22,9 +16,6 @@ podTemplate(containers: [
   persistentVolumeClaim(
       mountPath: '/home/jenkins/agent', 
       claimName: 'maven-workspace'      ),
-    persistentVolumeClaim(
-      mountPath: '/var/lib/docker', 
-      claimName: 'docker-cache'      ),
   persistentVolumeClaim(
       mountPath: '/root/.npm', 
       claimName: 'node-npm'      )
@@ -57,7 +48,26 @@ node(POD_LABEL) {
    
 
 
-}
+},
+podTemplate(containers: [
+
+
+        containerTemplate(
+        name: 'docker', 
+        image: 'docker:18.05-dind',
+        privileged: true
+
+          
+        )
+  ],
+  volumes: [
+
+    persistentVolumeClaim(
+      mountPath: '/var/lib/docker', 
+      claimName: 'docker-cache'      )
+  ]
+  
+  ) 
 node(POD_LABEL){
  stage('Docker build ') {                        
                 container('docker'){

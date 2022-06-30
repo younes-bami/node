@@ -54,7 +54,7 @@ node(POD_LABEL) {
     stage('Docker build ') {                        
            container('docker'){
                         sh '''
-                         docker build -t web-app
+                         docker build -t web-app .
                            '''
                              }
     }

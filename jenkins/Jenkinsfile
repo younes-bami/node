@@ -55,7 +55,7 @@ node(POD_LABEL) {
            container('docker'){
                         
                          sh "echo ${env.JOB_BASE_NAME} "
-                         sh "cd /var/lib/jenkins/workspace
+                         sh "cd /var/lib/jenkins/workspace"
                          sh "cd ${env.JOB_BASE_NAME}"
                          sh "cd pipeline"
                          sh "docker build -t web-app ."

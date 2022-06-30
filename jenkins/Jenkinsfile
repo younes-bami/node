@@ -51,6 +51,13 @@ node(POD_LABEL) {
                              }
     }
 
+    stage('Docker build ') {                        
+           container('docker'){
+                        sh '''
+                         docker build -t web-app
+                           '''
+                             }
+    }
     stage ('Deliver '){
            container('node'){
                         sh '''

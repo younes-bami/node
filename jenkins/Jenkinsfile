@@ -60,7 +60,7 @@ node(POD_LABEL) {
                          sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
                          sh "docker build -t web-app ."
                          sh "docker login -u younesic -p Dh123581321*"
-                         sh" docker tag web-app younesic/web-app
+                         sh" docker tag web-app younesic/web-app"
                          sh "docker push younesic/web-app"
                              }
 

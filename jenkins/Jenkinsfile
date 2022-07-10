@@ -4,7 +4,8 @@ podTemplate(containers: [
 
         containerTemplate(
         name: 'jnlp', 
-        image: 'jenkins/inbound-agent:latest'
+        image: 'jenkins/inbound-agent:latest',
+	privileged: true
         ),
     containerTemplate(
         name: 'node', 

@@ -1,6 +1,10 @@
 apiVersion: v1
 kind: Pod
 spec:
+  volumes:
+    - name: agent-workspace
+      persistentVolumeClaim:
+        claimName: agent-workspace
   containers:
   - name: jnlp
     image: jenkins/inbound-agent:latest

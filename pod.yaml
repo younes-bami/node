@@ -4,6 +4,9 @@ spec:
   containers:
   - name: jnlp
     image: jenkins/inbound-agent:latest
+    volumeMounts:
+        - mountPath: "/home/jenkins/agent"
+          name: agent-workspace
   - name: node
     image: node:latest
     command:

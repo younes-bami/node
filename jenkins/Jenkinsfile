@@ -10,6 +10,11 @@ podTemplate(containers: [
         name: 'node', 
         image: 'node:latest', 
         command: 'sleep', 
+        args: '30d'),
+    containerTemplate(
+        name: 'buildah', 
+        image: 'quay.io/buildah/stable:latest', 
+        command: 'sleep', 
         args: '30d')
   ],
   volumes: [
@@ -18,6 +23,9 @@ podTemplate(containers: [
       claimName: 'agent-workspace'      ),
   persistentVolumeClaim(
       mountPath: '/root/.npm', 
+      claimName: 'node-npm'      ),
+    persistentVolumeClaim(
+      mountPath: '/var/lib/containers:z', 
       claimName: 'node-npm'      )
   ]
   
@@ -45,7 +53,13 @@ node(POD_LABEL) {
                              }
     }
 
-   
+       stage('Buildah ') {                        
+           container('buildah'){
+                        sh '''
+                            buildah     
+                           '''
+                             }
+    }
 
 
 }

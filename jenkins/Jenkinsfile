@@ -1,35 +1,4 @@
-podTemplate(containers: [
-
-
-
-        containerTemplate(
-        name: 'jnlp', 
-        image: 'jenkins/inbound-agent:latest'
-        ),
-    containerTemplate(
-        name: 'node', 
-        image: 'node:latest', 
-        command: 'sleep', 
-        args: '30d'),
-    containerTemplate(
-        name: 'buildah', 
-        image: 'quay.io/buildah/stable:latest', 
-        command: 'sleep', 
-        args: '30d')
-  ],
-  volumes: [
-  persistentVolumeClaim(
-      mountPath: '/home/jenkins/agent', 
-      claimName: 'agent-workspace'      ),
-  persistentVolumeClaim(
-      mountPath: '/root/.npm', 
-      claimName: 'node-npm'      ),
-    persistentVolumeClaim(
-      mountPath: '/var/lib/containers:Z', 
-      claimName: 'buildah-volume'      )
-  ]
-  
-  ) {
+podTemplate(yaml: readTrusted('pod.yaml')) {
 node(POD_LABEL) {
     environment {
             CI = 'true'

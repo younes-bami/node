@@ -25,7 +25,7 @@ podTemplate(containers: [
       mountPath: '/root/.npm', 
       claimName: 'node-npm'      ),
     persistentVolumeClaim(
-      mountPath: '/var/lib/containers', 
+      mountPath: '/var/lib/containers:z', 
       claimName: 'buildah-volume'      )
   ]
   

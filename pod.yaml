@@ -5,6 +5,9 @@ spec:
     - name: workspace-volume
       persistentVolumeClaim:
         claimName: agent-workspace
+    - name: node-volume
+      persistentVolumeClaim:
+        claimName: node-npm
   containers:
   - name: jnlp
     image: jenkins/inbound-agent:latest
@@ -13,6 +16,9 @@ spec:
           name: workspace-volume
   - name: node
     image: node:latest
+    volumeMounts:
+        - mountPath: "/root/.npm"
+          name: node-volume
     command:
     - sleep
     args:

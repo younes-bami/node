@@ -60,6 +60,12 @@ node(POD_LABEL) {
   }
 podTemplate(yaml: readTrusted('pod.yaml')) {
   node(POD_LABEL) {
+  environment {
+            CI = 'true'
+                }
+  stage ('Git'){
+            git url: 'https://github.com/younes-bami/node.git', branch: 'master'
+    }
  stage('Buildah ') {                        
            container('buildah'){
                             sh "ls /home/jenkins"

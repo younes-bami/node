@@ -72,7 +72,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
  stage('Artefact ') {                        
            container('buildah'){
                             sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
-     //                       sh "buildah build   -t web-app:latest ."
+                            sh "buildah build   -t web-app:latest ."
     
 
                             

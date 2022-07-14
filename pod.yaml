@@ -2,30 +2,10 @@ apiVersion: v1
 kind: Pod
 spec:
   volumes:
-    - name: workspace-volume
-      persistentVolumeClaim:
-        claimName: agent-workspace
-    - name: node-volume
-      persistentVolumeClaim:
-        claimName: node-npm
     - name: buildah-vol
       persistentVolumeClaim:
         claimName: buildah-volume
   containers:
-  - name: jnlp
-    image: jenkins/inbound-agent:latest
-    volumeMounts:
-        - mountPath: "/home/jenkins/agent"
-          name: workspace-volume
-  - name: node
-    image: node:latest
-    volumeMounts:
-        - mountPath: "/root/.npm"
-          name: node-volume
-    command:
-    - sleep
-    args:
-    - 99d
   - name: buildah
     image: quay.io/buildah/stable:latest
     securityContext:
@@ -36,7 +16,7 @@ spec:
            - "SYS_CHROOT"
            - "SETFCAP"
     volumeMounts:
-        - mountPath: "/var/lib/containers"
+        - mountPath: "/var/lib/containers:Z"
           name: buildah-vol
     command:
     - sleep

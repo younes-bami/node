@@ -53,14 +53,18 @@ node(POD_LABEL) {
                              }
     }
 
-       stage('Buildah ') {                        
-           container('buildah'){
-                        sh '''
-                            buildah     
-                           '''
-                             }
-    }
+      
 
 
 }
   }
+podTemplate(yaml: readTrusted('pod.yaml')) {
+  node(POD_LABEL) {
+ stage('Buildah ') {                        
+           container('buildah'){
+                        sh '''
+                            buildah    
+                           '''
+                             }
+    }  }
+}

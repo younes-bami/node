@@ -80,7 +80,8 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                              }
       
           container('skopeo'){
-                          sh "skopeo copy --dest-creds younesic:Dh123581321* containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app "
+                          sh "skopeo inspect containers-storage:localhost/web-app:latest"
+                          sh "skopeo copy --dest-creds younesic:Dh123581321* containers-storage:web-app:latest docker://docker.io/younesic/web-app "
     
     }  
     }

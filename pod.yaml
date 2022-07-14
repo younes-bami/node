@@ -28,6 +28,13 @@ spec:
     - 99d
   - name: buildah
     image: quay.io/buildah/stable:latest
+    securityContext:
+       capabilities:
+         add:
+           - "SYS_ADMIN"
+           - "MKNOD"
+           - "SYS_CHROOT"
+           - "SETFCAP"
     volumeMounts:
         - mountPath: "/var/lib/containers:Z"
           name: buildah-vol

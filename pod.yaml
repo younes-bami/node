@@ -5,7 +5,7 @@ spec:
     - name: buildah-vol
       persistentVolumeClaim:
         claimName: buildah-volume
-    - name: jenkins-vol
+    - name: workspace-volume
       persistentVolumeClaim:
         claimName: agent-workspace
   containers:
@@ -13,7 +13,7 @@ spec:
     image: jenkins/inbound-agent:latest
     volumeMounts:
         - mountPath: "/home/jenkins/agent"
-          name: jenkins-vol
+          name: workspace-volume
   - name: buildah
     image: quay.io/buildah/stable:latest
     securityContext:

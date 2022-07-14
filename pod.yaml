@@ -16,9 +16,9 @@ spec:
 #          name: workspace-volume
   - name: buildah
     image: quay.io/buildah/stable:latest
-#    env: 
-#      - name: BUILDAH_LAYERS
-#        value: true 
+    env: 
+      - name: BUILDAH_LAYERS
+        value: true 
     securityContext:
        capabilities:
          add: ["SYS_ADMIN"]

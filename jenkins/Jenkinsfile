@@ -22,13 +22,13 @@ node(POD_LABEL) {
                              }
     }
 
- //      stage('Buildah ') {                        
- //          container('buildah'){
- //                        sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
- //                        sh "buildah bud -t web-app"
+       stage('Buildah ') {                        
+           container('buildah'){
+                         sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
+                         sh "buildah bud -t web-app"
 
- //                            }
- //   }
+                             }
+    }
 
 
 }

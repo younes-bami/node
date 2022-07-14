@@ -10,11 +10,6 @@ podTemplate(containers: [
         name: 'node', 
         image: 'node:latest', 
         command: 'sleep', 
-        args: '30d'),
-    containerTemplate(
-        name: 'buildah', 
-        image: 'quay.io/buildah/stable:latest', 
-        command: 'sleep', 
         args: '30d')
   ],
   volumes: [
@@ -23,10 +18,7 @@ podTemplate(containers: [
       claimName: 'agent-workspace'      ),
   persistentVolumeClaim(
       mountPath: '/root/.npm', 
-      claimName: 'node-npm'      ),
-    persistentVolumeClaim(
-      mountPath: '/var/lib/containers:z', 
-      claimName: 'buildah-volume'      )
+      claimName: 'node-npm'      )
   ]
   
   ) {
@@ -59,6 +51,15 @@ node(POD_LABEL) {
 }
   }
 podTemplate(yaml: readTrusted('pod.yaml')) {
+  podTemplate(containers: [
+
+      containerTemplate(
+        name: 'skopeo', 
+        image: 'quay.io/skopeo/stable:latest'
+        ),
+
+  ]
+  ){
   node(POD_LABEL) {
   environment {
             CI = 'true'
@@ -73,5 +74,12 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                             
 
                              }
-    }  }
+    }  
+  stage('Skopeo'){
+    container('skopeo'){
+      sh "skopeo"
+    }
+  }  
+    }
+}
 }

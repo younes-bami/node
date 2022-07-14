@@ -71,9 +71,13 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
     }
  stage('Artefact ') {                        
            container('buildah'){
+                            sh "ls /home/jenkins/.local/share/containers/storage"
                             sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
                             sh "buildah build   -t web-app:latest ."
-                            sh "ls /var/lib/images"
+                            sh "ls /home"
+                            sh "ls /home/jenkins/.local/share/containers/storage"
+    
+
                             
 
                              }

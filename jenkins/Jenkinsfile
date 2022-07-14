@@ -67,7 +67,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
   stage ('Git'){
             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
     }
- stage('Buildah ') {                        
+ stage('Artefact ') {                        
            container('buildah'){
                             sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
                             sh "buildah build --layers=true  -t web-app:latest ."
@@ -75,11 +75,10 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
 
                              }
     }  
-  stage('Skopeo'){
-    container('skopeo'){
-      sh "skopeo"
-    }
-  }  
+          container('skopeo'){
+                          sh "env"
+    
+    }  
     }
 }
 }

@@ -68,8 +68,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
     }
  stage('Buildah ') {                        
            container('buildah'){
-                            sh "export BUILDAH_LAYERS=true"
-                            sh "echo ${BUILDAH_LAYERS}"
+                            sh "env"
                             sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
                             sh "buildah bud -t web-app:latest ."
                              }

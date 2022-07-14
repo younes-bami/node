@@ -60,11 +60,6 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
         args: '30d'
         ),
 
-  ],
-  volumes: [
-  persistentVolumeClaim(
-      mountPath: '/var/lib/containers', 
-      claimName: 'buildah-volume'      )
   ]
   ){
   node(POD_LABEL) {
@@ -78,15 +73,17 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
            container('buildah'){
                             sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
                             sh "buildah build   -t web-app:latest ."
-    
+                            sh "sleep 300"
 
                             
 
                              }
       
           container('skopeo'){
+                          sh "sleep 300"
                           sh "skopeo inspect containers-storage:web-app:latest"
                           sh "skopeo copy --dest-creds younesic:Dh123581321* containers-storage:web-app:latest docker://docker.io/younesic/web-app "
+
     
     }  
     }

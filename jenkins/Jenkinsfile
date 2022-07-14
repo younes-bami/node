@@ -63,7 +63,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
   ],
   volumes: [
   persistentVolumeClaim(
-      mountPath: '/var/lib/containers:Z', 
+      mountPath: '/var/lib/containers', 
       claimName: 'buildah-volume'      )
   ]
   ){

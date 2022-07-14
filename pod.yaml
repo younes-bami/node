@@ -18,11 +18,12 @@ spec:
     image: quay.io/buildah/stable:latest
     securityContext:
        capabilities:
-         add:
-           - "SYS_ADMIN"
-           - "MKNOD"
-           - "SYS_CHROOT"
-           - "SETFCAP"
+         add: ["SYS_ADMIN"]
+    resources:
+          limits:
+            smarter-devices/fuse: 1
+          requests:
+            smarter-devices/fuse: 1
     volumeMounts:
         - mountPath: "/var/lib/containers:Z"
           name: buildah-vol

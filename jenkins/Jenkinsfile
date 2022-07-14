@@ -70,7 +70,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
            container('buildah'){
                             sh "env"
                             sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
-                            sh "buildah bud -t web-app:latest ."
+                            sh "buildah bud --layers true -t web-app:latest ."
                              }
     }  }
 }

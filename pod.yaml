@@ -36,7 +36,7 @@ spec:
            - "SYS_CHROOT"
            - "SETFCAP"
     volumeMounts:
-        - mountPath: "/var/lib/containers:Z"
+        - mountPath: "/var/lib/containers"
           name: buildah-vol
     command:
     - sleep

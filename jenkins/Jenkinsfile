@@ -14,13 +14,6 @@ podTemplate(containers: [
     containerTemplate(
         name: 'buildah', 
         image: 'quay.io/buildah/stable:latest', 
-        securityContext:
-          capabilities:
-         add:
-           - "SYS_ADMIN"
-           - "MKNOD"
-           - "SYS_CHROOT"
-           - "SETFCAP",
         command: 'sleep', 
         args: '30d')
   ],

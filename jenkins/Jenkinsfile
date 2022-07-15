@@ -54,7 +54,8 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
 
   node(POD_LABEL) {
   environment {
-      CI = 'true'
+      CI = 'true' = credentials('dockerhub')
+      dockerhub_cred
                 }
 
  stage('Artefact ') {                        
@@ -70,7 +71,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
       
           container('skopeo'){
                           sh "skopeo inspect containers-storage:localhost/web-app:latest"
-                          sh "skopeo copy --dest-creds ${env.DOCKERHUB_USR}:${env.DOCKERHUB_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app "
+                          sh "skopeo copy --dest-creds ${env.dockerhub_cred_USR}:${env.dockerhub_cred_PSW} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app "
 
     
     }  

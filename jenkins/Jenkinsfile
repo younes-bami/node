@@ -25,6 +25,8 @@ podTemplate(containers: [
 node(POD_LABEL) {
     environment {
             CI = 'true'
+            dockerhub_cred = credentials('dockerhub')
+
                 }
     stage ('Git'){
             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
@@ -54,7 +56,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
 
   node(POD_LABEL) {
   environment {
-            dockerhub_cred = credentials('dockerhub')
+      CI = 'true'
                 }
   //stage ('Git'){
   //          git url: 'https://github.com/younes-bami/node.git', branch: 'master'

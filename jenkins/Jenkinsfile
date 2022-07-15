@@ -69,11 +69,11 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                              }
       
           container('skopeo'){
-                          sh '''
-                          echo ${env.DOCKER_USR}
+                          sh """
+                          echo ${env}
                           skopeo inspect containers-storage:localhost/web-app:latest
                           skopeo copy --dest-creds ${env.DOCKER_USR}:${env.DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 
-                          '''
+                          """
 
     
     }  

@@ -55,15 +55,15 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
   node(POD_LABEL) {
   environment {
             CI = 'true'
-            dockerhub=credentials('dockerhub')
+            dockerhub = credentials('dockerhub')
                 }
-  stage ('Git'){
-            git url: 'https://github.com/younes-bami/node.git', branch: 'master'
-    }
+  //stage ('Git'){
+  //          git url: 'https://github.com/younes-bami/node.git', branch: 'master'
+  //  }
  stage('Artefact ') {                        
            container('buildah'){
                             sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
-           //                 sh "buildah build --layers=true  -t web-app:latest ."
+                            sh "buildah build --layers=true  -t web-app:latest ."
       
                             
 
@@ -71,7 +71,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
       
           container('skopeo'){
                           sh "skopeo inspect containers-storage:localhost/web-app:latest"
-                          sh "skopeo copy --dest-creds $dockerhub_USR:$dockerhub_PWD containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app "
+                          sh "skopeo copy --dest-creds $dockerhub_USR:$dockerhub_PSW containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app "
 
     
     }  

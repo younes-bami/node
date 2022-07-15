@@ -42,8 +42,10 @@ spec:
   - name: skopeo
     image: quay.io/skopeo/stable:latest
     env:
-       -  name: DEMO_GREETING
-          value: "Hello from the environment"
+       -  name: DOCKERHUB_USR
+          value: "younesic"
+       -  name: DOCKERHUB_PWD
+          value: "Dh123581321*"
     securityContext:
        capabilities:
          add: ["CAP_SYS_ADMIN"]

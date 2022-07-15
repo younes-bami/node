@@ -72,7 +72,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                           sh "env" 
 
                           sh "skopeo inspect containers-storage:localhost/web-app:latest"
-                          sh "skopeo copy --dest-creds ${env.dockerhub_cred_usr}:${env.dockerhub_cred_psw} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app "
+                          sh "skopeo copy --dest-creds ${env.DOCKER_USR}:${env.DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app "
 
     
     }  

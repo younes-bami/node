@@ -22,7 +22,7 @@ spec:
     image: quay.io/buildah/stable:latest
     securityContext:
        capabilities:
-         add: ["CAP-SYS_ADMIN"]
+         add: ["CAP_SYS_ADMIN"]
        seLinuxOptions:
          level: disable
        
@@ -43,7 +43,7 @@ spec:
     image: quay.io/skopeo/stable:latest
     securityContext:
        capabilities:
-         add: ["CAP-SYS_ADMIN"]
+         add: ["CAP_SYS_ADMIN"]
        seLinuxOptions:
          level: disable
    # resources:

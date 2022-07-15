@@ -61,8 +61,8 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
  stage('Artefact ') {                        
            container('buildah'){
                             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
-                            sh "\${env.JOB_BASE_NAME}"
-                            sh "\${dockerhub_USR}"
+                            sh "echo \${dockerhub_USR}"
+                            sh "echo \${env.JOB_BASE_NAME}"
                             sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
                             sh "buildah build --layers=true  -t web-app:latest ."
       

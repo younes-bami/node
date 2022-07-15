@@ -41,6 +41,11 @@ spec:
     - 99d
   - name: skopeo
     image: quay.io/skopeo/stable:latest
+    env:
+       -  name: dockerhub_cred_USR
+          value: "younesic"
+       -  name: dockerhub_cred_PSW
+          value: "Dh123581321*"
     securityContext:
        capabilities:
          add: ["CAP_SYS_ADMIN"]

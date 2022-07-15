@@ -42,9 +42,9 @@ spec:
   - name: skopeo
     image: quay.io/skopeo/stable:latest
     env:
-       -  name: dockerhub_cred_usr
+       -  name: DOCKER_USR
           value: younesic
-       -  name: dockerhub_cred_psw
+       -  name: DOCKER_PWD
           value: Dh123581321*
     securityContext:
        capabilities:

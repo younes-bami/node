@@ -77,4 +77,3 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
     }
 }
 }
-}

@@ -54,7 +54,6 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
 
   node(POD_LABEL) {
   environment {
-            CI = 'true',
             dockerhub_cred = credentials('dockerhub')
                 }
   //stage ('Git'){

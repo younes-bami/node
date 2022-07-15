@@ -56,7 +56,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
       containerTemplate(
         name: 'skopeo', 
         image: 'quay.io/skopeo/stable:latest',
-        runAsUser: 0,
+        runAsUser: "0",
         command: 'sleep', 
         args: '30d'
         ),

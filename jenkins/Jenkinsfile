@@ -70,7 +70,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
       
           container('skopeo'){
                           sh "env"
-                          sh "echo $(DOCKERHUB_USR)"
+                          echo "${DOCKERHUB_USR}"
                           sh "skopeo inspect containers-storage:localhost/web-app:latest"
                           sh "skopeo copy --dest-creds $(DOCKERHUB_USR):$(DOCKERHUB_PWD) containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app "
 

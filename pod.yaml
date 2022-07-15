@@ -35,3 +35,30 @@ spec:
     - sleep
     args:
     - 99d
+  - name: skopeo
+    image: quay.io/skopeo/stable:latest
+    securityContext:
+       capabilities:
+         add:
+           - "SYS_ADMIN"
+           - "MKNOD"
+           - "SYS_CHROOT"
+           - "SETFCAP"
+    resources:
+          limits:
+            smarter-devices/fuse: 1
+          requests:
+            smarter-devices/fuse: 1
+    volumeMounts:
+        - mountPath: "/var/lib/containers:Z"
+          name: buildah-vol
+    command:
+    - sleep
+    args:
+    - 99d
+
+
+
+
+
+

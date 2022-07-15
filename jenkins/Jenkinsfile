@@ -55,8 +55,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
   node(POD_LABEL) {
   environment {
             CI = 'true'
-            dockerhub_pwd = 'Dh123581321*'
-            dockerhub_usr= 'younesic'
+           
                 }
   //stage ('Git'){
   //          git url: 'https://github.com/younes-bami/node.git', branch: 'master'
@@ -73,9 +72,10 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                              }
       
           container('skopeo'){
+                  withEnv( [dockerhub_cred = credentials('dockerhub')]){
                           sh "skopeo inspect containers-storage:localhost/web-app:latest"
-                          sh "skopeo copy --dest-creds $dockerhub_usr:$dockerhub_pwd containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app "
-
+                          sh "skopeo copy --dest-creds $dockerhub_cred_USR:$dockerhub_cred_PSW containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app "
+                  }
     
     }  
     }

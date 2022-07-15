@@ -41,6 +41,9 @@ spec:
     - 99d
   - name: skopeo
     image: quay.io/skopeo/stable:latest
+    env:
+       -  name: DEMO_GREETING
+          value: "Hello from the environment"
     securityContext:
        capabilities:
          add: ["CAP_SYS_ADMIN"]

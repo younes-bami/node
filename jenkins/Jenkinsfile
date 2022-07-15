@@ -25,8 +25,6 @@ podTemplate(containers: [
 node(POD_LABEL) {
     environment {
             CI = 'true'
-            dockerhub_cred = credentials('dockerhub')
-
                 }
     stage ('Git'){
             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
@@ -58,9 +56,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
   environment {
       CI = 'true'
                 }
-  //stage ('Git'){
-  //          git url: 'https://github.com/younes-bami/node.git', branch: 'master'
-  //  }
+
  stage('Artefact ') {                        
            container('buildah'){
                             git url: 'https://github.com/younes-bami/node.git', branch: 'master'

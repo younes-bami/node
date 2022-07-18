@@ -49,9 +49,9 @@ spec:
             smarter-devices/fuse: 1
           requests:
             smarter-devices/fuse: 1
-    #volumeMounts:
-    #    - mountPath: "/var/lib/containers:Z"
-    #      name: buildah-vol
+    volumeMounts:
+        - mountPath: "/home/.local/share/containers"
+          name: buildah-vol
     command:
     - sleep
     args:

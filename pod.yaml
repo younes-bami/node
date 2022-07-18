@@ -9,6 +9,9 @@ spec:
     - name: buildah-vol
       persistentVolumeClaim:
         claimName: buildah-volume
+    - name: skopeo-vol
+      persistentVolumeClaim:
+        claimName: buildah-volume
 #    - name: workspace-volume
 #      persistentVolumeClaim:
 #        claimName: agent-workspace
@@ -58,7 +61,7 @@ spec:
             smarter-devices/fuse: 1
     volumeMounts:
         - mountPath: "/var/lib/containers:Z"
-          name: buildah-vol
+          name: skopeo-vol
     command:
     - sleep
     args:

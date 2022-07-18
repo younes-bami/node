@@ -71,6 +71,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                           sh """
                           mkdir -p /home/skopeo/.local/share/containers
                           sed '/rootless_storage_path/s/^#//' -i /etc/containers/storage.conf
+                          chown -R 1000:1000 /home/skopeo/.local/share/containers
                           skopeo inspect containers-storage:localhost/web-app:latest 
                           skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 
                           """

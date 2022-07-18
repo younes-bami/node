@@ -61,7 +61,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
            container('buildah'){
                             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
                             sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
-                            sh "buildah build --layers=true  -t web-app:latest ."
+                            //sh "buildah build --layers=true  -t web-app:latest ."
       
                             
 
@@ -69,7 +69,9 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
       
           container('skopeo'){
                           sh """
-                          mkdir -p /home/skopeo/.config/containers
+                          mkdir -p /home/skopeo/.config/container
+                          ls -la /home/skopeo
+                          ls -la /home/skopeo/mycontainers
                           cp /home/skopeo/mycontainers/config/storage.conf /home/skopeo/.config/containers
                           sleep 3600
                           skopeo inspect containers-storage:localhost/web-app:latest 

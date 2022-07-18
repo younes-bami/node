@@ -72,7 +72,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                           mkdir -p /home/skopeo/.config/container
                           ls -la /home/skopeo
                           ls -la /home/skopeo/mycontainers
-                          cp /home/skopeo/mycontainers/config/storage.conf /home/skopeo/.config/containers
+                          cp /home/skopeo/mycontainers/config/storage.conf /home/skopeo/.config/containers/storage.conf
                           sleep 3600
                           skopeo inspect containers-storage:localhost/web-app:latest 
                           skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 

@@ -69,7 +69,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
       
           container('skopeo'){
                           sh """
-                          chown -R 1000:1000 /var/lib/containers
+                          sleep 3600
                           skopeo inspect containers-storage:localhost/web-app:latest 
                           skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 
                           """

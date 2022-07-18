@@ -18,9 +18,8 @@ spec:
     securityContext:
         runAsUser: 1000
         runAsGroup: 1000
-        fsGroup: 1000
-        seLinuxOptions:
-         level: disable
+#        seLinuxOptions:
+#         level: disable
        
 
     resources:
@@ -43,9 +42,8 @@ spec:
        -  name: DOCKER_PWD
           value: Dh123581321*
     securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+    #    runAsUser: 1000
+    #    runAsGroup: 1000
     #   capabilities:
     #     add: ["CAP_SYS_ADMIN"]
     #   seLinuxOptions:

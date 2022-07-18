@@ -50,8 +50,8 @@ spec:
     securityContext:
      #  capabilities:
      #    add: ["CAP_SYS_ADMIN"]
-       seLinuxOptions:
-         level: disable
+     #  seLinuxOptions:
+     #    level: disable
     resources:
           limits:
             smarter-devices/fuse: 1

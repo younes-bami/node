@@ -50,7 +50,7 @@ spec:
           requests:
             smarter-devices/fuse: 1
     volumeMounts:
-        - mountPath: "/root/.local/share/containers"
+        - mountPath: "/home/skopeo/.local/share/containers"
           name: buildah-vol
     command:
     - sleep

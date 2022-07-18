@@ -40,6 +40,9 @@ spec:
        -  name: DOCKER_PWD
           value: Dh123581321*
     securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
     #   capabilities:
     #     add: ["CAP_SYS_ADMIN"]
     #   seLinuxOptions:
@@ -50,7 +53,7 @@ spec:
           requests:
             smarter-devices/fuse: 1
     volumeMounts:
-        - mountPath: "/var/lib/containers:Z"
+        - mountPath: "/home/skopeo/.local/share/containers"
           name: buildah-vol
     command:
     - sleep

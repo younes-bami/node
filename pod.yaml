@@ -10,15 +10,9 @@ spec:
       persistentVolumeClaim:
         claimName: buildah-volume
     
-#    - name: workspace-volume
-#      persistentVolumeClaim:
-#        claimName: agent-workspace
+
   containers:
-#  - name: jnlp
-#    image: jenkins/inbound-agent:latest
-#    volumeMounts:
-#        - mountPath: "/home/jenkins/agent"
-#          name: workspace-volume
+
   - name: buildah
     image: quay.io/buildah/stable:latest
     securityContext:
@@ -48,18 +42,18 @@ spec:
        -  name: DOCKER_PWD
           value: Dh123581321*
     securityContext:
-     #  capabilities:
-     #    add: ["CAP_SYS_ADMIN"]
-     #  seLinuxOptions:
-     #    level: disable
+       capabilities:
+         add: ["CAP_SYS_ADMIN"]
+       seLinuxOptions:
+         level: disable
     resources:
           limits:
             smarter-devices/fuse: 1
           requests:
             smarter-devices/fuse: 1
-    volumeMounts:
-        - mountPath: "/var/lib/containers:Z"
-          name: buildah-vol
+    #volumeMounts:
+    #    - mountPath: "/var/lib/containers:Z"
+    #      name: buildah-vol
     command:
     - sleep
     args:

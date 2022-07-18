@@ -68,7 +68,8 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                              }
       
           container('skopeo'){
-                          sh "sleep 3600"
+                          sh "echo 'rootless_storage_path = "$HOME/.local/share/containers/storage"' >> /etc/containers/storage.conf"
+                          sh "sleep 300"
                           sh " skopeo inspect containers-storage:localhost/web-app:latest "
                           sh " skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app "
                           

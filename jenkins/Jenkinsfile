@@ -61,7 +61,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
            container('buildah'){
                             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
                             sh "cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}"
-                            //sh "buildah build --layers=true  -t web-app:latest ."
+                            sh "buildah build --layers=true  -t web-app:latest ."
       
                             
 

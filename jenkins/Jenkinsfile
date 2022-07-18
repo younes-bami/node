@@ -55,7 +55,6 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
   node(POD_LABEL) {
   environment {
       CI = 'true'
-      dockerhub = credentials('dockerhub')
                 }
 
  stage('Artefact ') {                        

@@ -51,11 +51,11 @@ spec:
      #    add: ["CAP_SYS_ADMIN"]
        seLinuxOptions:
          level: disable
-   # resources:
-   #       limits:
-   #         smarter-devices/fuse: 1
-   #       requests:
-   #         smarter-devices/fuse: 1
+    resources:
+          limits:
+            smarter-devices/fuse: 1
+          requests:
+            smarter-devices/fuse: 1
     volumeMounts:
         - mountPath: "/var/lib/containers:Z"
           name: buildah-vol

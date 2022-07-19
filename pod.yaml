@@ -19,7 +19,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         capabilities:
-          add: ["CHROOT"]
+          add: ["SYS_CHROOT"]
         seLinuxOptions:
          level: disable
     resources:

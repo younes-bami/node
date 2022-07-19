@@ -14,19 +14,19 @@ spec:
   containers:
 
   - name: buildah
-    image: quay.io/buildah/stable:latest
+    image: docker.io/younesic/buildah
     securityContext:
     #    runAsUser: 1000
     #    runAsGroup: 1000
         capabilities:
-          add: ["SYS_CHROOT"]
+          add: ["CAP_SETUID,CAP_SETGID"]
 #        seLinuxOptions:
 #         level: disable
-    resources:
-          limits:
-            smarter-devices/fuse: 1
-          requests:
-            smarter-devices/fuse: 1
+#    resources:
+#          limits:
+#            smarter-devices/fuse: 1
+#          requests:
+#            smarter-devices/fuse: 1
     volumeMounts:
         - mountPath: "/var/lib/containers:Z"
           name: buildah-vol
@@ -42,17 +42,17 @@ spec:
        -  name: DOCKER_PWD
           value: Dh123581321*
     securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
+    #    runAsUser: 1000
+    #    runAsGroup: 1000
     #   capabilities:
     #     add: ["CAP_SYS_ADMIN"]
-        seLinuxOptions:
-         level: disable
-    resources:
-          limits:
-            smarter-devices/fuse: 1
-          requests:
-            smarter-devices/fuse: 1
+    #  seLinuxOptions:
+    #     level: disable
+    #resources:
+    #      limits:
+    #        smarter-devices/fuse: 1
+    #      requests:
+    #        smarter-devices/fuse: 1
     volumeMounts:
         - mountPath: "/home/skopeo/mycontainers:Z"
           name: buildah-vol

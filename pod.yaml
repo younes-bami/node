@@ -33,9 +33,10 @@ spec:
         - mountPath: "/var/lib/containers:Z"
           name: buildah-vol
     command:
-    - sleep
+    - python3
     args:
-    - 99d
+    - -m
+    - http.server
   - name: skopeo
     image: quay.io/skopeo/stable:latest
     env:

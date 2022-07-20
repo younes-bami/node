@@ -64,10 +64,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                             cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}
                             buildah build --layers=true  -t web-app:latest .
                             buildah images --all
-                            """
-                            
-      
-                            
+                            """ 
 
                              }
       

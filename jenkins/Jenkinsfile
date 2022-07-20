@@ -64,7 +64,6 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                             cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}
                             buildah build --layers=true  -t web-app:latest .
                             buildah images --all
-                            sleep 600
                             """ 
 
                              }
@@ -72,7 +71,6 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
           container('skopeo'){
                           sh """
                           cd /home/skopeo
-                          sleep 600
                           skopeo inspect containers-storage:localhost/web-app:latest 
                           skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 
                           """

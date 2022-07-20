@@ -30,7 +30,7 @@ spec:
 #          requests:
 #            smarter-devices/fuse: 1
     volumeMounts:
-        - mountPath: "/var/lib/containers"
+        - mountPath: "/home/skopeo/.local/share/containers"
           name: buildah-vol
     command:
     - python3
@@ -57,12 +57,13 @@ spec:
     #      requests:
     #        smarter-devices/fuse: 1
     volumeMounts:
-        - mountPath: "/home/skopeo/.local/share/containers/storage"
+        - mountPath: "/home/skopeo/.local/share/containers"
           name: buildah-vol
     command:
-    - sleep
+    - python3
     args:
-    - 99d
+    - -m
+    - http.server
 
 
 

@@ -60,10 +60,9 @@ spec:
         - mountPath: "/home/skopeo/.local/share/containers"
           name: buildah-vol
     command:
-    - python3
+    - sleep
     args:
-    - -m
-    - http.server
+    - 99d
 
 
 

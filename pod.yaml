@@ -1,34 +1,32 @@
 apiVersion: v1
 kind: Pod
-metadata: 
-#  annotations: 
-#      container.apparmor.security.beta.kubernetes.io/buildah: unconfined
-#      container.apparmor.security.beta.kubernetes.io/skopeo: unconfined
+
 spec:
   volumes:
     - name: buildah-vol
       persistentVolumeClaim:
         claimName: buildah-volume
+    - name: node-vol
+      persistentVolumeClaim:
+        claimName: node-npm
     
-
   containers:
+
+  - name: node
+    image: node:latest
+    volumeMounts:
+        - mountPath: "/root/.npm"
+          name: node-vol
+    command:
+    - sleep
+    args:
+    - 99d
+
 
   - name: buildah
     image: docker.io/younesic/buildah
     securityContext:
-    #    runAsUser: 1000
-    #    runAsGroup: 1000
-    #    capabilities:
-    #      add: 
-    #        - SETUID
-    #        - SETGID
-#        seLinuxOptions:
-#         level: disable
-#    resources:
-#          limits:
-#            smarter-devices/fuse: 1
-#          requests:
-#            smarter-devices/fuse: 1
+    
     volumeMounts:
         - mountPath: "/home/build/.local/share/containers"
           name: buildah-vol
@@ -45,17 +43,6 @@ spec:
        -  name: DOCKER_PWD
           value: Dh123581321*
     securityContext:
-    #     runAsUser: 1000
-    #     runAsGroup: 1000
-    #    capabilities:
-    #      add: ["SYS_CHROOT"]
-    #  seLinuxOptions:
-    #     level: disable
-    #resources:
-    #      limits:
-    #        smarter-devices/fuse: 1
-    #      requests:
-    #        smarter-devices/fuse: 1
     volumeMounts:
         - mountPath: "/home/skopeo/.local/share/containers"
           name: buildah-vol
@@ -64,6 +51,7 @@ spec:
     args:
     - 99d
 
+  
 
 
 

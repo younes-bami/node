@@ -26,11 +26,31 @@ node(POD_LABEL){
                          sh "docker login -u younesic -p Dh123581321*"
                          sh" docker tag web-app younesic/web-app"
                          sh "docker push younesic/web-app"
-                             }
-
+                             }                            $HOME/.config/containers/storage.conf
+                                                          rootless_storage_path = "$HOME/.local/share/containers/storage"
+                                                          ignore_chown_errors = "false"
 
 
     }
 }
 
 }
+
+
+sh """
+                          mkdir -p /home/skopeo/.config/containers
+                          cp /home/skopeo/mycontainers/config/storage.conf /home/skopeo/.config/containers/storage.conf
+                          sleep 3600
+                          skopeo inspect containers-storage:localhost/web-app:latest 
+                          skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 
+                          """
+
+
+
+remap-uids = 0:1668442479:65536
+remap-gids = 0:1668442479:65536
+remap-user = "containers"
+remap-group = "containers"
+[storage.options.overlay]
+#ignore_chown_errors = "false"
+mount_program = "/usr/bin/fuse-overlayfs"

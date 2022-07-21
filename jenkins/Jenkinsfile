@@ -63,7 +63,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                             sh """
                             env
                             sleep 300
-                            cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}
+                            cd ${env.PWD}
                             buildah build --layers=true  -t web-app:latest .
                             buildah images --all
                             """ 

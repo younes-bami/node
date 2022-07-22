@@ -9,18 +9,18 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
     }
     stage ('Build'){
             container('node'){
-			            sh '''
-                  sleep 3600
+			            sh """
+                  cd \${PWD}
 			            npm install
-                  '''
+                  """
                              }
 
     }
     stage('Test ') {                        
            container('node'){
-                        sh '''
+                        sh """
                          ./jenkins/scripts/test.sh
-                           '''
+                           """
                              }
     }
 

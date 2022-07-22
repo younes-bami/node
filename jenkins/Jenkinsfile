@@ -32,7 +32,6 @@ node(POD_LABEL) {
     stage ('Build'){
             container('node'){
 			            sh '''
-                  sleep 3600
 			            npm install
                   '''
                              }

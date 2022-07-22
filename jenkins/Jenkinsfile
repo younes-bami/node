@@ -26,8 +26,9 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
     stage('Artefact ') {                        
            container('buildah'){
                             sh """
-                            cd /home/jenkins/agent/workspace/${env.JOB_BASE_NAME}
-                            buildah build --layers=true  -t web-app:latest .
+                            cd \${PWD}
+                            buildah images --all 
+                            #buildah build --layers=true  -t web-app:latest .
                             """ 
 
                              }
@@ -35,7 +36,8 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
           container('skopeo'){
                           sh """
                           cd /home/skopeo
-                          skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 
+                          skopeo inspect containers-storage:localhost/web-app:latest
+                          #skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 
                           """
 
     

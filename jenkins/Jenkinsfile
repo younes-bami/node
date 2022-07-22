@@ -10,6 +10,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
     stage ('Build'){
             container('node'){
 			            sh '''
+                  Sleep 3600
 			            npm install
                   '''
                              }

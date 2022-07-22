@@ -31,17 +31,18 @@ node(POD_LABEL) {
     }
     stage ('Build'){
             container('node'){
-			            sh '''
+			            sh """
+                  cd \${PWD}
 			            npm install
-                  '''
+                  """
                              }
 
     }
     stage('Test ') {                        
            container('node'){
-                        sh '''
+                        sh """
                          ./jenkins/scripts/test.sh
-                           '''
+                           """
                              }
     }
 

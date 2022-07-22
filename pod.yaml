@@ -9,8 +9,17 @@ spec:
     - name: node-vol
       persistentVolumeClaim:
         claimName: node-npm
+    - name: jnlp-vol
+      persistentVolumeClaim:
+        claimName: agent-workspace
     
   containers:
+
+  - name: jnlp
+    image: jenkins/inbound-agent:latest
+    volumeMounts:
+      - mountPath: 
+        name: jnlp-vol
 
   - name: node
     image: node:latest

@@ -5,9 +5,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
       CI = 'true'
                 }
   stage ('Git'){
-            container('jnlp'){
-                  git url: 'https://github.com/younes-bami/node.git', branch: 'master'
-            }
+            git url: 'https://github.com/younes-bami/node.git', branch: 'master'
     }
     stage ('Build'){
             container('node'){

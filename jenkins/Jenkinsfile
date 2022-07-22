@@ -61,7 +61,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
            container('buildah'){
                             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
                             sh """
-                            echo \${env.PWD}
+                            echo \${PWD}
                             cd $PWD
                             buildah build --layers=true  -t web-app:latest .
                             buildah images --all

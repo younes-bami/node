@@ -56,21 +56,19 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
 
   node(POD_LABEL) {
   environment {
-  CI = 'true'
+      CI = 'true'
                 }
 
  stage('Artefact ') {    
 
- 
                   
            container('buildah'){
-
+ 
                             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
                             sh """
                             cd \${PWD}
-                            if (env.BRANCH_NAME == 'prod'){
-                              buildah build --layers=true  -t web-app:latest .
-                            }
+                            if (env.BRANCH_NAME != 'prod'){echo hello not prod}
+                            buildah build --layers=true  -t web-app:latest .
                             buildah images --all
                             """ 
 
@@ -80,9 +78,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                           sh """
                           cd /home/skopeo
                           skopeo inspect containers-storage:localhost/web-app:latest 
-                          if (env.BRANCH_NAME == 'prod'){
-                            skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 
-                          }
+                          skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 
                           """
 
     

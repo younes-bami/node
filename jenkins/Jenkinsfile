@@ -58,23 +58,20 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
   environment {
       CI = 'true'
                 }
- //when { environment name: 'DEPLOY_TO', value: 'production' } 
  //          env.BRANCH_NAME != 'master';
      
  stage('Artefact ') {    
-            when {
-              branch 'prod'
-            }
-            steps(){
+
             container('buildah'){
  
                             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
+                            if (env.BRANCH_NAME == 'production'){
                             sh """
                             cd \${PWD}
                             buildah build --layers=true  -t web-app:latest .
                             buildah images --all
                             """ 
-
+                              }
                              }
       
           container('skopeo'){
@@ -87,6 +84,6 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
     
     }
  }  
-    }
+    
 }
 }

@@ -61,11 +61,13 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
 
  stage('Artefact ') {    
 
+           when {
+                          beforeAgent: true
+                          branch 'production'
+            }  
                   
            container('buildah'){
-                      when {
-                        branch 'production'
-                            }  
+
                             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
                             sh """
                             cd \${PWD}

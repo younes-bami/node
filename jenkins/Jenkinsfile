@@ -1,32 +1,10 @@
-podTemplate(containers: [
+podTemplate(yaml: readTrusted('pod.yaml')) {
 
-
-
-        containerTemplate(
-        name: 'jnlp', 
-        image: 'jenkins/inbound-agent:latest'
-        ),
-    containerTemplate(
-        name: 'node', 
-        image: 'node:latest', 
-        command: 'sleep', 
-        args: '30d')
-  ],
-  volumes: [
-  persistentVolumeClaim(
-      mountPath: '/home/jenkins/agent', 
-      claimName: 'agent-workspace'      ),
-  persistentVolumeClaim(
-      mountPath: '/root/.npm', 
-      claimName: 'node-npm'      )
-  ]
-  
-  ) {
-node(POD_LABEL) {
-    environment {
-            CI = 'true'
+  node(POD_LABEL) {
+  environment {
+      CI = 'true'
                 }
-    stage ('Git'){
+  stage ('Git'){
             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
     }
     stage ('Build'){
@@ -47,51 +25,50 @@ node(POD_LABEL) {
                              }
     }
 
-      
-
 
 }
-  }
+}
+
 podTemplate(yaml: readTrusted('pod.yaml')) {
 
   node(POD_LABEL) {
   environment {
       CI = 'true'
                 }
-     
- stage('Artefact ') {    
 
-            container('buildah'){
- 
-                            git url: 'https://github.com/younes-bami/node.git', branch: 'master'
+
+
+    stage('Artefact ') {                        
+           container('buildah'){
                             if (env.BRANCH_NAME == 'production'){
+
                             sh """
                             cd \${PWD}
-                            buildah build --layers=true  -t web-app:latest .
-                            buildah images --all
+                            buildah images --all 
+                            #buildah build --layers=true  -t web-app:latest .
                             """ 
                               }
-                              sh """
-                              buildah images --all
-                              """
+                            sh """
+                                buildah images --all 
+                            """
                              }
       
           container('skopeo'){
-                       if (env.BRANCH_NAME == 'production'){
+                        if (env.BRANCH_NAME == 'production'){
                           sh """
                           cd /home/skopeo
-                          skopeo inspect containers-storage:localhost/web-app:latest 
-                          skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 
+                          skopeo inspect containers-storage:localhost/web-app:latest
+                          #skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 
                           """
-                       }
-                       sh """
-                                                 skopeo inspect containers-storage:localhost/web-app:latest 
+                        }
+                        sh """
+                              skopeo inspect containers-storage:localhost/web-app:latest
 
-                       """
+                        """
 
     
+    }  
     }
- }  
-    
 }
 }
+

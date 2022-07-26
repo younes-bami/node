@@ -34,6 +34,7 @@ node(POD_LABEL) {
 			            sh """
                   cd \${PWD}
 			            npm install
+                  npm build
                   """
                              }
 

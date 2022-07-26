@@ -56,15 +56,16 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
 
   node(POD_LABEL) {
   environment {
-      CI = 'true'
+  CI = 'true'
                 }
-
- stage('Artefact ') {    
-
            when {
                           beforeAgent: true
                           branch 'production'
-            }  
+          } 
+
+ stage('Artefact ') {    
+
+ 
                   
            container('buildah'){
 

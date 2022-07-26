@@ -67,7 +67,6 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
                             sh """
                             cd \${PWD}
-                            if (env.BRANCH_NAME != 'prod'){echo hello not prod}
                             buildah build --layers=true  -t web-app:latest .
                             buildah images --all
                             """ 

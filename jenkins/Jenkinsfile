@@ -60,8 +60,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
 
  stage('Artefact ') {    
 
-  when {
-                beforeAgent true
+          when {
                 branch 'production'
             }                    
            container('buildah'){

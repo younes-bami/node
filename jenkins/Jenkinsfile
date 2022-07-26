@@ -62,7 +62,9 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
  //          env.BRANCH_NAME != 'master';
      
  stage('Artefact ') {    
-            when (branch 'prod')
+            when {
+              branch 'prod'
+            }
             steps(){
             container('buildah'){
  

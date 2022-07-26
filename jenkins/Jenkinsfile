@@ -72,7 +72,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                             """ 
                               }
                               sh """
-                                  buildah build --layers=true  -t web-app:latest .
+                              buildah images --all
                               """
                              }
       

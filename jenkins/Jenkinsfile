@@ -58,10 +58,6 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
   environment {
   CI = 'true'
                 }
-           when {
-                          beforeAgent: true
-                          branch 'production'
-          } 
 
  stage('Artefact ') {    
 

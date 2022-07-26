@@ -22,7 +22,7 @@ podTemplate(containers: [
   ]
   
   ) {
-node(POD_LABEL) {
+node('CI-POD') {
     environment {
             CI = 'true'
                 }
@@ -54,15 +54,17 @@ node(POD_LABEL) {
   }
 podTemplate(yaml: readTrusted('pod.yaml')) {
 
-  node(POD_LABEL) {
+  node('CD_POD') {
   environment {
       CI = 'true'
                 }
-
+ //when { environment name: 'DEPLOY_TO', value: 'production' } 
+ //          env.BRANCH_NAME != 'master';
+     
  stage('Artefact ') {    
-
-          when { environment name: 'DEPLOY_TO', value: 'production' }      
-           container('buildah'){
+            when (branch 'prod')
+            steps(){
+            container('buildah'){
  
                             git url: 'https://github.com/younes-bami/node.git', branch: 'master'
                             sh """
@@ -81,7 +83,8 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
                           """
 
     
-    }  
+    }
+ }  
     }
 }
 }

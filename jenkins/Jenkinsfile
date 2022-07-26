@@ -61,7 +61,7 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
 
  stage('Artefact ') {    
 
-                  
+          when { environment name: 'DEPLOY_TO', value: 'production' }      
            container('buildah'){
  
                             git url: 'https://github.com/younes-bami/node.git', branch: 'master'

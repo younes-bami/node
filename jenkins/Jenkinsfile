@@ -22,7 +22,7 @@ podTemplate(containers: [
   ]
   
   ) {
-node('CI-POD') {
+node(POD_LABEL) {
     environment {
             CI = 'true'
                 }
@@ -54,7 +54,7 @@ node('CI-POD') {
   }
 podTemplate(yaml: readTrusted('pod.yaml')) {
 
-  node('CD_POD') {
+  node(POD_LABEL) {
   environment {
       CI = 'true'
                 }

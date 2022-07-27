@@ -27,9 +27,6 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
 
 
 }
-}
-
-podTemplate(yaml: readTrusted('pod.yaml')) {
 
   node(POD_LABEL) {
   environment {

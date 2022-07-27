@@ -28,44 +28,6 @@ podTemplate(yaml: readTrusted('pod.yaml')) {
 
 }
 
-  node(POD_LABEL) {
-  environment {
-      CI = 'true'
-                }
 
-
-
-    stage('Artefact ') {                        
-           container('buildah'){
-                            if (env.BRANCH_NAME == 'production'){
-
-                            sh """
-                            cd \${PWD}
-                            buildah images --all 
-                            #buildah build --layers=true  -t web-app:latest .
-                            """ 
-                              }
-                            sh """
-                                buildah images --all 
-                            """
-                             }
-      
-          container('skopeo'){
-                        if (env.BRANCH_NAME == 'production'){
-                          sh """
-                          cd /home/skopeo
-                          skopeo inspect containers-storage:localhost/web-app:latest
-                          #skopeo copy --dest-creds \${DOCKER_USR}:\${DOCKER_PWD} containers-storage:localhost/web-app:latest docker://docker.io/younesic/web-app 
-                          """
-                        }
-                        sh """
-                              skopeo inspect containers-storage:localhost/web-app:latest
-
-                        """
-
-    
-    }  
-    }
-}
 }
 

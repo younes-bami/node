@@ -2,13 +2,25 @@ podTemplate(containers: [
 
 
 
-        containerTemplate(
+    containerTemplate(
         name: 'jnlp', 
         image: 'jenkins/inbound-agent:latest'
         ),
     containerTemplate(
         name: 'node', 
         image: 'node:latest', 
+        command: 'sleep', 
+        args: '30d'),
+    containerTemplate(
+        name: 'buildah', 
+        image: 'docker.io/younesic/buildah', 
+        command: 'python3', 
+        args: 
+          - 'm'
+          - 'http.server' ),
+    containerTemplate(
+        name: 'skopeo', 
+        image: 'docker.io/younesic/skopeo', 
         command: 'sleep', 
         args: '30d')
   ],
@@ -18,7 +30,13 @@ podTemplate(containers: [
       claimName: 'agent-workspace'      ),
   persistentVolumeClaim(
       mountPath: '/root/.npm', 
-      claimName: 'node-npm'      )
+      claimName: 'node-npm'      ),
+  persistentVolumeClaim(
+      mountPath: '/home/build/.local/share/containers', 
+      claimName: 'buildah-volume'      ),
+  persistentVolumeClaim(
+      mountPath: '/home/skopeo/.local/share/containers', 
+      claimName: 'buildah-volume'      )
   ]
   
   ) {
@@ -49,21 +67,11 @@ node(POD_LABEL) {
 
       
 
-
-}
-  }
-podTemplate(yaml: readTrusted('pod.yaml')) {
-
-  node(POD_LABEL) {
-  environment {
-      CI = 'true'
-                }
      
  stage('Artefact ') {    
 
             container('buildah'){
  
-                            git url: 'https://github.com/younes-bami/node.git', branch: 'master'
                             if (env.BRANCH_NAME == 'production'){
                             sh """
                             cd \${PWD}

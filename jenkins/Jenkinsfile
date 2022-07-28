@@ -64,11 +64,8 @@ node(POD_LABEL) {
                            """
                              }
     }
-
-      
-
      
- stage('Artefact ') {    
+    stage('Artefact ') {    
 
             container('buildah'){
  

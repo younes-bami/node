@@ -14,8 +14,8 @@ podTemplate(containers: [
     containerTemplate(
         name: 'buildah', 
         image: 'docker.io/younesic/buildah', 
-        command: 'python3', 
-        args: ['m','http.server'] ),
+        command: 'sleep', 
+        args: '30d' ),
     containerTemplate(
         name: 'skopeo', 
         image: 'docker.io/younesic/skopeo', 

@@ -31,10 +31,7 @@ podTemplate(containers: [
       claimName: 'node-npm'      ),
   persistentVolumeClaim(
       mountPath: '/home/build/.local/share/containers', 
-      claimName: 'buildah-volume'      ),
-  persistentVolumeClaim(
-      mountPath: '/home/skopeo/.local/share/containers', 
-      claimName: 'skopeo-volume'      )
+      claimName: 'buildah-volume'      )
   ]
   
   ) {
